@@ -1,0 +1,9 @@
+<img [src]="currentArticle?.imageUrl" alt="Article Image" class="article-image">
+
+<div class="article-detail" *ngIf="currentArticle">
+  <h2 class="article-title">{{ currentArticle.title }}</h2>
+  <p class="article-summary"> {{ currentArticle.summary }}</p>
+</div>
+
+<a class="articles-back" mat-button [routerLink]="'/articles'"><span class="material-symbols-rounded arrow-back">arrow_back</span>Back
+  to homepage</a>

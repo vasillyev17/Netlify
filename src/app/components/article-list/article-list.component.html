@@ -1,0 +1,31 @@
+<div class="search">
+  <p class="search-title">Filter by keywords</p>
+  <mat-form-field class="search-input" appearance="outline">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput [(ngModel)]="searchKeyword" placeholder="Search by keyword" (input)="filterArticles()">
+  </mat-form-field>
+</div>
+
+<p class="search-result">Results: {{ filteredArticles.length }}</p>
+
+
+<div class="article-list">
+  <div *ngFor="let article of filteredArticles" class="article-item">
+    <mat-card class="article-card">
+      <img mat-card-image class="article-image" [src]="article.imageUrl" alt="Article Image" height="230">
+      <mat-card-content>
+        <div class="article-date">
+          <span class="material-symbols-rounded calendar-today">calendar_today</span>
+          <p>{{ article.publishedAt | date:'longDate' }}</p>
+        </div>
+        <h2 class="article-title" [innerHTML]="article.title | highlight: searchKeyword">
+          [innerHTML]="highlightKeywords(article.title)"></h2>
+        <p class="article-summary" [innerHTML]="article.summary | highlight: searchKeyword"></p>
+      </mat-card-content>
+      <mat-card-actions class="article-link-block">
+        <a class="article-link" mat-button [routerLink]="'/articles/' + article.id">Read More <span
+          class="material-symbols-rounded arrow-forward">arrow_forward</span></a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
